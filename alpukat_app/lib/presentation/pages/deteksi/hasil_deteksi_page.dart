@@ -54,9 +54,9 @@ class HasilDeteksiPage extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: AppColors.warningColor.withOpacity(0.15),
+                        color: AppColors.warningColor.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: AppColors.warningColor.withOpacity(0.4)),
+                        border: Border.all(color: AppColors.warningColor.withValues(alpha: 0.4)),
                       ),
                       child: Row(
                         children: const [
@@ -125,7 +125,7 @@ class HasilDeteksiPage extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: kematanganColor.withOpacity(0.1),
+                      color: kematanganColor.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(12),
                       border: Border(
                         left: BorderSide(color: kematanganColor, width: 4),
@@ -243,7 +243,7 @@ class HasilDeteksiPage extends StatelessWidget {
                       Expanded(
                         child: ElevatedButton.icon(
                           onPressed: () {
-                            // TODO: integrasikan share_plus jika dibutuhkan
+                            // Rencana: integrasikan share_plus jika dibutuhkan
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(

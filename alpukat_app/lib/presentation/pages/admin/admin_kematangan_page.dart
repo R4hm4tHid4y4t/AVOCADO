@@ -69,19 +69,21 @@ class _AdminKematanganPageState extends State<AdminKematanganPage> {
               try {
                 final remote = sl<AdminRemoteDataSource>();
                 if (isEdit) {
-                  await remote.updateKematangan(item!['id'] as int,
+                  await remote.updateKematangan(item['id'] as int,
                       label: labelCtrl.text.trim(), deskripsi: deskripsiCtrl.text.trim(), ciriVisual: ciriCtrl.text.trim());
                 } else {
                   await remote.createKematangan(
                       label: labelCtrl.text.trim(), deskripsi: deskripsiCtrl.text.trim(), ciriVisual: ciriCtrl.text.trim());
                 }
-                if (mounted) {
-                  Navigator.pop(ctx);
-                  _load();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(isEdit ? 'Berhasil diperbarui' : 'Berhasil ditambahkan'), backgroundColor: AppColors.successColor),
-                  );
-                }
+                
+                if (!ctx.mounted) return;
+                Navigator.pop(ctx);
+                
+                if (!mounted) return;
+                _load();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(isEdit ? 'Berhasil diperbarui' : 'Berhasil ditambahkan'), backgroundColor: AppColors.successColor),
+                );
               } on ServerException catch (e) {
                 if (mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message), backgroundColor: AppColors.errorColor));
@@ -159,7 +161,7 @@ class _AdminKematanganPageState extends State<AdminKematanganPage> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(12),
                           border: Border(left: BorderSide(color: color, width: 5)),
-                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 6, offset: const Offset(0, 2))],
+                          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 6, offset: const Offset(0, 2))],
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,7 +171,7 @@ class _AdminKematanganPageState extends State<AdminKematanganPage> {
                               children: [
                                 Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                  decoration: BoxDecoration(color: color.withOpacity(0.15), borderRadius: BorderRadius.circular(6)),
+                                  decoration: BoxDecoration(color: color.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(6)),
                                   child: Text(label, style: TextStyle(color: color, fontWeight: FontWeight.bold, fontSize: 12)),
                                 ),
                                 Row(

@@ -20,7 +20,7 @@ class RiwayatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => sl<RiwayatBloc>()..add(const RiwayatLoaded())),
+        BlocProvider(create: (_) => sl<RiwayatBloc>()..add(const LoadRiwayat())),
         BlocProvider(create: (_) => sl<StatistikCubit>()..load()),
       ],
       child: const _RiwayatView(),
@@ -65,7 +65,7 @@ class _RiwayatViewState extends State<_RiwayatView> {
   }
 
   Future<void> _onRefresh() async {
-    context.read<RiwayatBloc>().add(const RiwayatLoaded());
+    context.read<RiwayatBloc>().add(const LoadRiwayat());
     context.read<StatistikCubit>().load();
     await Future.delayed(const Duration(milliseconds: 500));
   }
@@ -155,7 +155,7 @@ class _RiwayatViewState extends State<_RiwayatView> {
                   return SliverFillRemaining(
                     child: ErrorStateWidget(
                       message: state.message,
-                      onRetry: () => context.read<RiwayatBloc>().add(const RiwayatLoaded()),
+                      onRetry: () => context.read<RiwayatBloc>().add(const LoadRiwayat()),
                     ),
                   );
                 }
@@ -253,7 +253,7 @@ class _RiwayatViewState extends State<_RiwayatView> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 4, offset: const Offset(0, 2))],
+          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 4, offset: const Offset(0, 2))],
         ),
         child: Column(
           children: [

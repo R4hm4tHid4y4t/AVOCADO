@@ -11,7 +11,7 @@ class RiwayatBloc extends Bloc<RiwayatEvent, RiwayatState> {
   final DeteksiRemoteDataSource _remote;
 
   RiwayatBloc(this._remote) : super(const RiwayatInitial()) {
-    on<RiwayatLoaded>(_onLoaded);
+    on<LoadRiwayat>(_onLoaded);
     on<RiwayatLoadMore>(_onLoadMore);
     on<FilterChanged>(_onFilterChanged);
     on<RiwayatDeleted>(_onDeleted);
@@ -56,7 +56,7 @@ class RiwayatBloc extends Bloc<RiwayatEvent, RiwayatState> {
     }
   }
 
-  Future<void> _onLoaded(RiwayatLoaded event, Emitter<RiwayatState> emit) async {
+  Future<void> _onLoaded(LoadRiwayat event, Emitter<RiwayatState> emit) async {
     emit(const RiwayatLoading());
     int? varietasId;
     if (state is RiwayatLoaded) {

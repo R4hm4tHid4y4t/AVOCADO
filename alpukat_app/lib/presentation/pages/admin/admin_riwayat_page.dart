@@ -94,13 +94,15 @@ class _AdminRiwayatPageState extends State<AdminRiwayatPage> {
                     statusFlag: selectedFlag,
                     catatan: catatanCtrl.text.trim(),
                   );
-                  if (mounted) {
-                    Navigator.pop(ctx);
-                    _load();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Status berhasil diperbarui'), backgroundColor: AppColors.successColor),
-                    );
-                  }
+                  
+                  if (!ctx.mounted) return;
+                  Navigator.pop(ctx);
+                  
+                  if (!mounted) return;
+                  _load();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Status berhasil diperbarui'), backgroundColor: AppColors.successColor),
+                  );
                 } on ServerException catch (e) {
                   if (mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message), backgroundColor: AppColors.errorColor));
@@ -233,7 +235,7 @@ class _AdminRiwayatPageState extends State<AdminRiwayatPage> {
                                 }
 
                                 return DataRow(
-                                  color: isFlagged ? WidgetStateProperty.all(AppColors.warningColor.withOpacity(0.08)) : null,
+                                  color: isFlagged ? WidgetStateProperty.all(AppColors.warningColor.withValues(alpha: 0.08)) : null,
                                   cells: [
                                     DataCell(Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -253,7 +255,7 @@ class _AdminRiwayatPageState extends State<AdminRiwayatPage> {
                                     DataCell(Container(
                                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                                       decoration: BoxDecoration(
-                                        color: isFlagged ? AppColors.warningColor.withOpacity(0.2) : AppColors.successColor.withOpacity(0.15),
+                                        color: isFlagged ? AppColors.warningColor.withValues(alpha: 0.2) : AppColors.successColor.withValues(alpha: 0.15),
                                         borderRadius: BorderRadius.circular(6),
                                       ),
                                       child: Text(statusFlag, style: TextStyle(fontSize: 10, color: isFlagged ? AppColors.warningColor : AppColors.successColor)),
@@ -280,7 +282,7 @@ class _AdminRiwayatPageState extends State<AdminRiwayatPage> {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
         decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 6, offset: const Offset(0, 2))]),
+          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 6, offset: const Offset(0, 2))]),
         child: Column(
           children: [
             Text(value, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: color)),

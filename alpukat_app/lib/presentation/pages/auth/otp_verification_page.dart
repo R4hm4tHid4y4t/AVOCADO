@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../blocs/auth/auth_bloc.dart';
 import '../../blocs/auth/auth_event.dart';
@@ -73,7 +72,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
   }
 
   void _resendOtp() {
-    // TODO: panggil endpoint resend OTP jika tersedia
+    // Catatan: panggil endpoint resend OTP jika tersedia
     _startTimer();
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Kode OTP baru telah dikirim')),

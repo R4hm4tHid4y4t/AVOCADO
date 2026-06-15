@@ -49,7 +49,8 @@ class _SplashPageState extends State<SplashPage>
         } else if (state is AuthUnauthenticated) {
           final local = sl<AuthLocalDataSource>();
           final onboardingDone = await local.isOnboardingDone();
-          if (!mounted) return;
+          
+          if (!context.mounted) return;
           context.go(onboardingDone ? '/login' : '/onboarding');
         }
       },
@@ -87,7 +88,7 @@ class _SplashPageState extends State<SplashPage>
                 Text(
                   'Klasifikasi & Deteksi Kematangan',
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.8),
+                    color: Colors.white.withValues(alpha: 0.8),
                     fontSize: 14,
                   ),
                 ),

@@ -66,17 +66,19 @@ class _AdminVarietasPageState extends State<AdminVarietasPage> {
               try {
                 final remote = sl<AdminRemoteDataSource>();
                 if (isEdit) {
-                  await remote.updateVarietas(item!['id'] as int, nama: namaCtrl.text.trim(), deskripsi: deskripsiCtrl.text.trim());
+                  await remote.updateVarietas(item['id'] as int, nama: namaCtrl.text.trim(), deskripsi: deskripsiCtrl.text.trim());
                 } else {
                   await remote.createVarietas(nama: namaCtrl.text.trim(), deskripsi: deskripsiCtrl.text.trim());
                 }
-                if (mounted) {
-                  Navigator.pop(ctx);
-                  _load();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(isEdit ? 'Varietas diperbarui' : 'Varietas ditambahkan'), backgroundColor: AppColors.successColor),
-                  );
-                }
+                
+                if (!ctx.mounted) return;
+                Navigator.pop(ctx);
+                
+                if (!mounted) return;
+                _load();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(isEdit ? 'Varietas diperbarui' : 'Varietas ditambahkan'), backgroundColor: AppColors.successColor),
+                );
               } on ServerException catch (e) {
                 if (mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message), backgroundColor: AppColors.errorColor));

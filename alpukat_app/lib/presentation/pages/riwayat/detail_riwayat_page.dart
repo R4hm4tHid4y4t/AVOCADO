@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/errors/exceptions.dart';
@@ -202,9 +201,9 @@ class _DetailRiwayatPageState extends State<DetailRiwayatPage> {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: AppColors.warningColor.withOpacity(0.15),
+                      color: AppColors.warningColor.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: AppColors.warningColor.withOpacity(0.4)),
+                      border: Border.all(color: AppColors.warningColor.withValues(alpha: 0.4)),
                     ),
                     child: Row(
                       children: const [
@@ -258,7 +257,7 @@ class _DetailRiwayatPageState extends State<DetailRiwayatPage> {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: kematanganColor.withOpacity(0.1),
+                    color: kematanganColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                     border: Border(left: BorderSide(color: kematanganColor, width: 4)),
                   ),

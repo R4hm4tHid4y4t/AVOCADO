@@ -141,7 +141,7 @@ class _AdminModelPageState extends State<AdminModelPage> {
                         Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12),
-                            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 6, offset: const Offset(0, 2))]),
+                            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 6, offset: const Offset(0, 2))]),
                           child: Column(
                             children: const [
                               _ArchStep(label: 'Input Layer', detail: '224 × 224 × 3 (RGB)'),
@@ -190,7 +190,7 @@ class _AdminModelPageState extends State<AdminModelPage> {
                                   DataCell(isActive
                                       ? Container(
                                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                                          decoration: BoxDecoration(color: AppColors.successColor.withOpacity(0.15), borderRadius: BorderRadius.circular(6)),
+                                          decoration: BoxDecoration(color: AppColors.successColor.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(6)),
                                           child: const Text('Aktif', style: TextStyle(fontSize: 11, color: AppColors.successColor)),
                                         )
                                       : const Text('-', style: TextStyle(color: AppColors.textGrey))),

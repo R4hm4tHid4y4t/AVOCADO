@@ -170,7 +170,7 @@ class _AdminPenggunaPageState extends State<AdminPenggunaPage> {
                                   DataCell(Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                                     decoration: BoxDecoration(
-                                      color: isAdmin ? AppColors.setengahColor.withOpacity(0.15) : AppColors.extraLightGreen,
+                                      color: isAdmin ? AppColors.setengahColor.withValues(alpha: 0.15) : AppColors.extraLightGreen,
                                       borderRadius: BorderRadius.circular(6),
                                     ),
                                     child: Text(m['role'] as String, style: TextStyle(fontSize: 11, color: isAdmin ? AppColors.setengahColor : AppColors.primaryGreen)),
@@ -193,7 +193,7 @@ class _AdminPenggunaPageState extends State<AdminPenggunaPage> {
                                       ),
                                       Switch(
                                         value: isActive,
-                                        activeColor: AppColors.successColor,
+                                        activeThumbColor: AppColors.successColor,
                                         onChanged: (_) => _toggleStatus(m),
                                       ),
                                     ],
@@ -215,7 +215,7 @@ class _AdminPenggunaPageState extends State<AdminPenggunaPage> {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
         decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 6, offset: const Offset(0, 2))]),
+          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 6, offset: const Offset(0, 2))]),
         child: Column(
           children: [
             Text(value, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: color)),

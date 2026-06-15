@@ -7,8 +7,8 @@ abstract class RiwayatEvent extends Equatable {
 }
 
 /// Load awal / refresh dari halaman 1
-class RiwayatLoaded extends RiwayatEvent {
-  const RiwayatLoaded();
+class LoadRiwayat extends RiwayatEvent {
+  const LoadRiwayat();
 }
 
 /// Load halaman selanjutnya (infinite scroll)

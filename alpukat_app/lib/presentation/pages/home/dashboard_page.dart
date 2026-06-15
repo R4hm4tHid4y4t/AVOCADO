@@ -20,7 +20,7 @@ class DashboardPage extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => sl<StatistikCubit>()..load()),
-        BlocProvider(create: (_) => sl<RiwayatBloc>()..add(const RiwayatLoaded())),
+        BlocProvider(create: (_) => sl<RiwayatBloc>()..add(const LoadRiwayat())),
       ],
       child: const _DashboardView(),
     );
@@ -41,7 +41,7 @@ class _DashboardView extends StatelessWidget {
         child: RefreshIndicator(
           onRefresh: () async {
             context.read<StatistikCubit>().load();
-            context.read<RiwayatBloc>().add(const RiwayatLoaded());
+            context.read<RiwayatBloc>().add(const LoadRiwayat());
             await Future.delayed(const Duration(milliseconds: 500));
           },
           child: SingleChildScrollView(
@@ -232,7 +232,7 @@ class _DashboardView extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 6, offset: const Offset(0, 2))],
+          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 6, offset: const Offset(0, 2))],
         ),
         child: Column(
           children: [
@@ -253,7 +253,7 @@ class _DashboardView extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 6, offset: const Offset(0, 2))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 6, offset: const Offset(0, 2))],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -277,9 +277,9 @@ class _DashboardView extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.12),
+        color: color.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

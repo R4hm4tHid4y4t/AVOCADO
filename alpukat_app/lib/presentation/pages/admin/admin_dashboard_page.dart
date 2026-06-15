@@ -105,7 +105,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12),
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 6, offset: const Offset(0, 2))]),
+            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 6, offset: const Offset(0, 2))]),
           child: Row(
             children: [
               const Icon(Icons.smart_toy, color: AppColors.primaryGreen, size: 28),
@@ -132,7 +132,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
           height: 220,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12),
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 6, offset: const Offset(0, 2))]),
+            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 6, offset: const Offset(0, 2))]),
           child: _buildLineChart((d['tren_mingguan'] as List<dynamic>?) ?? []),
         ),
         const SizedBox(height: 24),
@@ -164,7 +164,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 6, offset: const Offset(0, 2))]),
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 6, offset: const Offset(0, 2))]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -185,7 +185,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 12),
           decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12),
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 6, offset: const Offset(0, 2))]),
+            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 6, offset: const Offset(0, 2))]),
           child: Column(
             children: [
               Icon(icon, color: AppColors.primaryGreen, size: 22),
@@ -237,7 +237,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
             color: AppColors.primaryGreen,
             barWidth: 3,
             dotData: const FlDotData(show: true),
-            belowBarData: BarAreaData(show: true, color: AppColors.primaryGreen.withOpacity(0.1)),
+            belowBarData: BarAreaData(show: true, color: AppColors.primaryGreen.withValues(alpha: 0.1)),
           ),
         ],
       ),
@@ -248,7 +248,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 6, offset: const Offset(0, 2))]),
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 6, offset: const Offset(0, 2))]),
       child: Column(
         children: [
           Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
