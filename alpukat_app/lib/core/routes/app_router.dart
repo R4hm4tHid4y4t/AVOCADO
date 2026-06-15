@@ -17,6 +17,12 @@ import '../../presentation/pages/riwayat/riwayat_page.dart';
 import '../../presentation/pages/riwayat/detail_riwayat_page.dart';
 import '../../presentation/pages/profil/profil_page.dart';
 import '../../presentation/pages/profil/ganti_password_page.dart';
+import '../../presentation/pages/admin/admin_dashboard_page.dart';
+import '../../presentation/pages/admin/admin_varietas_page.dart';
+import '../../presentation/pages/admin/admin_kematangan_page.dart';
+import '../../presentation/pages/admin/admin_pengguna_page.dart';
+import '../../presentation/pages/admin/admin_model_page.dart';
+import '../../presentation/pages/admin/admin_riwayat_page.dart';
 import '../../presentation/widgets/main_navigation.dart';
 
 final _rootKey = GlobalKey<NavigatorState>();
@@ -31,6 +37,7 @@ GoRouter createRouter(AuthBloc authBloc) {
     redirect: (context, state) {
       final authState = authBloc.state;
       final isAuth = authState is AuthAuthenticated;
+      final isAdmin = isAuth && authState.user.isAdmin;
       final isOnAuthPage = state.matchedLocation.startsWith('/login') ||
           state.matchedLocation.startsWith('/register') ||
           state.matchedLocation.startsWith('/splash') ||
@@ -38,10 +45,21 @@ GoRouter createRouter(AuthBloc authBloc) {
           state.matchedLocation.startsWith('/verify-otp') ||
           state.matchedLocation.startsWith('/forgot-password') ||
           state.matchedLocation.startsWith('/reset-password');
+      final isOnAdminPage = state.matchedLocation.startsWith('/admin');
 
       if (!isAuth && !isOnAuthPage) return '/login';
-      if (isAuth && (state.matchedLocation == '/login' ||
-          state.matchedLocation == '/register')) return '/home/dashboard';
+
+      // Admin login → langsung ke panel admin
+      if (isAuth && isAdmin && (state.matchedLocation == '/login' || state.matchedLocation == '/register')) {
+        return '/admin/dashboard';
+      }
+      // User biasa login → ke dashboard mobile
+      if (isAuth && !isAdmin && (state.matchedLocation == '/login' || state.matchedLocation == '/register')) {
+        return '/home/dashboard';
+      }
+      // Cegah user biasa mengakses panel admin
+      if (isAuth && !isAdmin && isOnAdminPage) return '/home/dashboard';
+
       return null;
     },
 
@@ -68,6 +86,14 @@ GoRouter createRouter(AuthBloc authBloc) {
           return ResetPasswordPage(email: extra['email'] as String? ?? '');
         },
       ),
+
+      // Admin Web Routes — menggunakan Drawer, bukan BottomNav
+      GoRoute(path: '/admin/dashboard', builder: (_, __) => const AdminDashboardPage()),
+      GoRoute(path: '/admin/varietas', builder: (_, __) => const AdminVarietasPage()),
+      GoRoute(path: '/admin/kematangan', builder: (_, __) => const AdminKematanganPage()),
+      GoRoute(path: '/admin/pengguna', builder: (_, __) => const AdminPenggunaPage()),
+      GoRoute(path: '/admin/model', builder: (_, __) => const AdminModelPage()),
+      GoRoute(path: '/admin/riwayat', builder: (_, __) => const AdminRiwayatPage()),
 
       // Shell route — Home dengan BottomNavigationBar
       ShellRoute(

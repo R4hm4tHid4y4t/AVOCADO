@@ -4,6 +4,8 @@ import '../core/network/dio_client.dart';
 import '../data/datasources/auth_local_datasource.dart';
 import '../data/datasources/auth_remote_datasource.dart';
 import '../data/datasources/deteksi_remote_datasource.dart';
+import '../data/datasources/profil_remote_datasource.dart';
+import '../data/datasources/admin_remote_datasource.dart';
 import '../data/repositories/auth_repository_impl.dart';
 import '../domain/repositories/auth_repository.dart';
 import '../domain/usecases/login_usecase.dart';
@@ -36,6 +38,12 @@ Future<void> initDependencies() async {
   );
   sl.registerLazySingleton<DeteksiRemoteDataSource>(
     () => DeteksiRemoteDataSource(sl<DioClient>()),
+  );
+  sl.registerLazySingleton<ProfilRemoteDataSource>(
+    () => ProfilRemoteDataSource(sl<DioClient>()),
+  );
+  sl.registerLazySingleton<AdminRemoteDataSource>(
+    () => AdminRemoteDataSource(sl<DioClient>()),
   );
 
   // ── Repositories ──────────────────────────────────────
