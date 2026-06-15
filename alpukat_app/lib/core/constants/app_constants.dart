@@ -3,7 +3,7 @@ class AppConstants {
 
   // Base URL — ganti ke IP lokal jika test di device fisik
   // Emulator Android: 10.0.2.2 → localhost komputer
-  static const String baseUrl = 'http://192.168.1.21:8000';
+  static const String baseUrl = 'http://10.0.2.2:8000';
   static const String apiUrl = '$baseUrl/api';
   static const String storageUrl = '$baseUrl/storage';
 

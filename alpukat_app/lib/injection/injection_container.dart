@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import '../core/network/dio_client.dart';
 import '../data/datasources/auth_local_datasource.dart';
 import '../data/datasources/auth_remote_datasource.dart';
+import '../data/datasources/deteksi_remote_datasource.dart';
 import '../data/repositories/auth_repository_impl.dart';
 import '../domain/repositories/auth_repository.dart';
 import '../domain/usecases/login_usecase.dart';
@@ -13,6 +14,9 @@ import '../domain/usecases/get_current_user_usecase.dart';
 import '../domain/usecases/forgot_password_usecase.dart';
 import '../domain/usecases/reset_password_usecase.dart';
 import '../presentation/blocs/auth/auth_bloc.dart';
+import '../presentation/blocs/deteksi/deteksi_bloc.dart';
+import '../presentation/blocs/riwayat/riwayat_bloc.dart';
+import '../presentation/blocs/statistik/statistik_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -29,6 +33,9 @@ Future<void> initDependencies() async {
   );
   sl.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSource(sl<DioClient>()),
+  );
+  sl.registerLazySingleton<DeteksiRemoteDataSource>(
+    () => DeteksiRemoteDataSource(sl<DioClient>()),
   );
 
   // ── Repositories ──────────────────────────────────────
@@ -48,7 +55,7 @@ Future<void> initDependencies() async {
   sl.registerLazySingleton(() => ForgotPasswordUseCase(sl<AuthRepository>()));
   sl.registerLazySingleton(() => ResetPasswordUseCase(sl<AuthRepository>()));
 
-  // ── BLoC ──────────────────────────────────────────────
+  // ── BLoC / Cubit ──────────────────────────────────────
   sl.registerFactory(() => AuthBloc(
         login: sl<LoginUseCase>(),
         register: sl<RegisterUseCase>(),
@@ -58,4 +65,8 @@ Future<void> initDependencies() async {
         forgotPassword: sl<ForgotPasswordUseCase>(),
         resetPassword: sl<ResetPasswordUseCase>(),
       ));
+
+  sl.registerFactory(() => DeteksiBloc(sl<DeteksiRemoteDataSource>()));
+  sl.registerFactory(() => RiwayatBloc(sl<DeteksiRemoteDataSource>()));
+  sl.registerFactory(() => StatistikCubit(sl<DeteksiRemoteDataSource>()));
 }
